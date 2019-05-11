@@ -2,13 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class SecondScreen extends StatelessWidget {
+class SecondScreen extends StatefulWidget {
+  @override
+  _SecondScreenState createState() => new _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Screen"),
-      ),
       body: Center(
           child: Column(
         children: <Widget>[

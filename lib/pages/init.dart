@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-class InitScreen extends StatelessWidget {
+class InitScreen extends StatefulWidget {
+  @override
+  _InitScreenState createState() => new _InitScreenState();
+}
+
+class _InitScreenState extends State<InitScreen>  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,24 +19,10 @@ class InitScreen extends StatelessWidget {
               child: Text('Launch page1'),
               onPressed: () {
                 // Navigate to the second screen using a named route
-                Navigator.pushNamed(context, '/page1');
+                Navigator.of(context).pushNamed("/home");
               },
-            ),
-            RaisedButton(
-              child: Text('Launch page2'),
-              onPressed: () {
-                // Navigate to the second screen using a named route
-                Navigator.pushNamed(context, '/page2');
-              },
-            ),
-            RaisedButton(
-              child: Text('Launch page3'),
-              onPressed: () {
-                // Navigate to the second screen using a named route
-                Navigator.pushNamed(context, '/page3');
-              },
-            ),
-          ],
+            )
+          ]
         )
       ),
     );
