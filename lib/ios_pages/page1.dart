@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class FirstScreen extends StatefulWidget{
   @override
@@ -9,9 +8,14 @@ class FirstScreen extends StatefulWidget{
 class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child:  Text('Page1'),
+    return CupertinoPageScaffold(
+      navigationBar: new CupertinoNavigationBar(
+        middle: Text("PAGE1"),
+      ),
+      child: Container(
+        child: Center(
+          child: Text("PAGE1"),
+        ),
       ),
     );
   }
