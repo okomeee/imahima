@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/init.dart';
+import 'package:imahima/init.dart';
 
 void main() {
   runApp(App());

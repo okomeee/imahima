@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'page1.dart';
-import 'page2.dart';
-import 'page3.dart';
+import 'package:imahima/pages/page1.dart';
+import 'package:imahima/pages/page2.dart';
+import 'package:imahima/pages/page3.dart';
 
 class HomeScreen extends StatefulWidget {
  @override
@@ -49,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
               currentAppbar = barname[index];
               _currentIndex= index;
               currentPage = pages[index];
-              
             });
           },
         type: BottomNavigationBarType.fixed,
