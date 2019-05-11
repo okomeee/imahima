@@ -1,5 +1,6 @@
 // ymt117
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class SecondScreen extends StatelessWidget {
   @override
@@ -11,12 +12,36 @@ class SecondScreen extends StatelessWidget {
       body: Center(
           child: Column(
         children: <Widget>[
+          timerPicker,
           textBox,
           buttonSection,
         ],
       )),
     );
   }
+
+/*
+  Widget timerPicker = Container(
+      child: FlatButton(
+          onPressed: () {
+            DatePicker.showDatePicker(context,
+                showTitleActions: true,
+                minTime: DateTime(2018, 3, 5),
+                maxTime: DateTime(2019, 6, 7),
+                onChanged: (date) {
+                  print('change $date');
+                },
+                onConfirm: (date) {
+                  print('confirm $date');
+                },
+                currentTime: DateTime.now(),
+                locale: LocaleType.jp);
+          },
+          child: Text(
+            'show date time picker (Japanese)',
+            style: TextStyle(color: Colors.blue),
+          )));
+*/
 
   Widget textBox = Container(
     padding: const EdgeInsets.all(32),
