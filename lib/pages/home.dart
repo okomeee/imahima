@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imahima/pages/page1.dart';
 import 'package:imahima/pages/page2.dart';
 import 'package:imahima/pages/page3.dart';
+import 'package:imahima/pages/page4.dart';
 
 class HomeScreen extends StatefulWidget {
  @override
@@ -14,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   FirstScreen p1;
   SecondScreen p2;
   ThirdScreen p3;
+  AccountScreen p4;
   List<Widget> pages;
   List<String> barname;
   Widget currentPage;
@@ -25,8 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
     p1 = FirstScreen();
     p2 = SecondScreen();
     p3 = ThirdScreen();
-    pages = [p1, p2, p3];
-    barname = ['First Screen','Second Screen','Third Screen'];
+    p4 = AccountScreen();
+    pages = [p1, p2, p3, p4];
+    barname = ['First Screen','Second Screen','Third Screen', 'アカウント'];
 
     currentPage = pages[0];
     currentAppbar = barname[0];
@@ -45,12 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
         fixedColor: Colors.blue,
         //tap時に下タブとbodywidgetの書き換え
         onTap:(int index) {
-            setState(() {
-              currentAppbar = barname[index];
-              _currentIndex= index;
-              currentPage = pages[index];
-            });
-          },
+          setState(() {
+            currentAppbar = barname[index];
+            _currentIndex= index;
+            currentPage = pages[index];
+          });
+        },
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
@@ -64,6 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             title: Text('Profile')
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Account')
           ),
         ],
       ),
