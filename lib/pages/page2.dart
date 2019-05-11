@@ -13,19 +13,23 @@ class _SecondScreenState extends State<SecondScreen> {
     return Scaffold(
       body: ListView(
         children: [
+          Text(
+            '15:00 ~ 18:00 まで',
+            textAlign: TextAlign.center,
+            textScaleFactor: 2.5,
+          ),
           FlatButton(
               onPressed: () {
-                DatePicker.showDatePicker(context,
-                    showTitleActions: true,
-                    minTime: DateTime(2018, 3, 5),
-                    maxTime: DateTime(2019, 6, 7), onChanged: (date) {
-                  print('change $date');
+                DatePicker.showTimePicker(context, showTitleActions: true,
+                    onChanged: (date) {
+                  print('change $date in time zone ' +
+                      date.timeZoneOffset.inHours.toString());
                 }, onConfirm: (date) {
                   print('change $date');
-                }, currentTime: DateTime.now(), locale: LocaleType.en);
+                }, currentTime: DateTime.now());
               },
               child: Text(
-                'show date time picker (English)',
+                '時刻を設定する',
                 style: TextStyle(color: Colors.blue),
               )),
           textBox,
@@ -49,7 +53,7 @@ class _SecondScreenState extends State<SecondScreen> {
       onPressed: () {
         // 入力した「いまヒマ」情報をアップロードする処理
       },
-      child: Text('いまヒマ'),
+      child: Text('「いまヒマ」情報を登録する'),
     ),
   );
 }
