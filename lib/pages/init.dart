@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 class InitScreen extends StatefulWidget {
   @override
@@ -10,20 +11,18 @@ class _InitScreenState extends State<InitScreen>  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Screen'),
+        title: Text('Init Screen'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Text('Launch page1'),
-              onPressed: () {
-                // Navigate to the second screen using a named route
-                Navigator.of(context).pushNamed("/home");
-              },
-            )
-          ]
-        )
+        child: Center(
+          child: RaisedButton(
+            child: Text('Home'),
+            onPressed: () {
+              Route route = MaterialPageRoute(builder: (context) => HomeScreen());
+              Navigator.pushReplacement(context, route);
+            },
+          ),
+        ),
       ),
     );
   }

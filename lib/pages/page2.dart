@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class SecondScreen extends StatefulWidget{
   @override
   _SecondScreenState createState() => new _SecondScreenState();
-  
 }
 
 class _SecondScreenState extends State<SecondScreen> {
@@ -12,12 +11,7 @@ class _SecondScreenState extends State<SecondScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
+        child:  Text('Page1'),
       ),
     );
   }
