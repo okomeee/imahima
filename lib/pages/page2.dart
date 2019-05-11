@@ -22,10 +22,10 @@ class _SecondScreenState extends State<SecondScreen> {
                   print('change $date');
                 }, onConfirm: (date) {
                   print('change $date');
-                }, currentTime: DateTime.now(), locale: LocaleType.jp);
+                }, currentTime: DateTime.now(), locale: LocaleType.en);
               },
               child: Text(
-                'show date time picker (Japanese)',
+                'show date time picker (English)',
                 style: TextStyle(color: Colors.blue),
               )),
           textBox,
