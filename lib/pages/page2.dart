@@ -16,6 +16,7 @@ class _SecondScreenState extends State<SecondScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 150.0),
         children: [
           Text(
             ' ~ $formattedDate まで',
@@ -60,6 +61,7 @@ class _SecondScreenState extends State<SecondScreen> {
   );
 
   Widget buttonSection = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 50.0)
     child: RaisedButton(
       onPressed: () {
         // 入力した「いまヒマ」情報をアップロードする処理
