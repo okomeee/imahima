@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:async'; 
+import 'dart:convert'; 
+import 'package:http/http.dart' as http;
 
 // class DataList{
 //   final user_id;
@@ -13,27 +16,36 @@ import 'package:flutter/material.dart';
 //   }
 // }
 
-// class DataList{
-//   final String username;
-//   final String todo;
-//   const DataList({this.username, this.todo});
-// }
+class DataList{
+  final id;
+  final comment;
+  final time;
+  final user;
+  const DataList({this.id, this.comment, this.time, this.user});
 
-// const datalist = const <DataList>[
-//     const DataList(
-//       username: 'Romain Hoogmoed',
-//       todo:'romain.hoogmoed@example.com'
-//     ),
-//     const DataList(
-//       username: 'Romain Hoogmoed',
-//       todo:'romain.hoogmoed@example.com'
-//     ),
-//     const DataList(
-//       username: 'Romain Hoogmoed',
-//       todo:'romain.hoogmoed@example.com'
-//     ),
-// ];
+  factory DataList.fromJson(Map<String, dynamic> json) {
+    return DataList(
+      id: json['id'],
+      comment: json['comment'],
+      time: json['time'],
+      user: UserList.fromJson(json['user']),
+    );
+  }
+}
+class UserList{
+  final id;
+  final name;
+  final image;
+  const UserList({this.id, this.name, this.image});
 
+  factory UserList.fromJson(Map<String, dynamic> json) {
+    return UserList(
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
+    );
+  }
+}
 
 
 class FirstScreen extends StatefulWidget{
@@ -42,28 +54,75 @@ class FirstScreen extends StatefulWidget{
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  List<String> username = ["レッド", "ブルー", "イエロー"];
-  List<String> todo = ["ご飯行きたい","なんでも","ちゃーん"];
 
-  //final DataList datalist;
-  //_FirstScreenState(this.datalist);
+  Future<List<DataList>> alldata;
+  DataList datalist;
+
+  @override
+  void initState(){
+    dataGet().then((onValue){
+      setState(() {
+        alldata = dataGet();
+      });
+    });
+
+    super.initState();
+
+  }
+  Future<List<DataList>> dataGet() async {
+    var dt = new List<DataList>();
+    final response = await http.get('https://imahima-api.k-appdev.com/v1/posts');
+    String responseBody = utf8.decode(response.bodyBytes);
+    final jsondatalist = json.decode(responseBody);
+    final datalist = jsondatalist; 
+    if (response.statusCode == 200) {
+      for(int i = 0; i < datalist.length; i++){
+        dt.add(DataList.fromJson(datalist[i]));
+      }
+      //print(dt);
+      //await new Future.delayed(new Duration(seconds: 5));
+      return dt;
+    } else {
+      throw Exception('Failed to load post');
+    }
+  }
   
+
+  int x;
   @override
   Widget build(BuildContext context) {
-    return  ListView(
-      children: const <Widget>[
-        Card(
-          child: ListTile(
-            leading: FlutterLogo(size: 72.0),
-            title: Text('Three-line ListTile'),
-            subtitle: Text(
-              'A sufficiently long subtitle warrants three lines.'
-            ),
-            trailing: Icon(Icons.more_vert),
-            isThreeLine: true,
-          )
-      ),
-      ]
+    return Scaffold(
+      body:FutureBuilder<List<DataList>>(
+        future: alldata,
+        builder: (context,snapshot){
+          if(snapshot.hasData){
+            return new Container(
+            child:ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                  return new Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: Colors.black38),
+                      ),
+                    ),
+                    child: ListTile(
+                      leading: FlutterLogo(size: 72.0),
+                      title: Text(snapshot.data[index].user.name),
+                      subtitle: Text(snapshot.data[index].comment),
+                      onTap: () { /* react to the tile being tapped */ },
+                  ));
+              },
+            )
+          );
+
+          }else if(snapshot.hasError){
+            print('error');
+          }
+          return CircularProgressIndicator();
+        }
+      )
+
     );
   }
 }
