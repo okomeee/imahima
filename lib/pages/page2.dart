@@ -48,6 +48,7 @@ class _SecondScreenState extends State<SecondScreen> {
         child: Text(
           '時刻を設定する',
           style: TextStyle(color: Colors.blue),
+          textScaleFactor: 1.5,
         ));
   }
 
@@ -61,7 +62,7 @@ class _SecondScreenState extends State<SecondScreen> {
   );
 
   Widget buttonSection = Container(
-    padding: const EdgeInsets.symmetric(horizontal: 50.0)
+    padding: const EdgeInsets.symmetric(horizontal: 50.0),
     child: RaisedButton(
       onPressed: () {
         // 入力した「いまヒマ」情報をアップロードする処理
