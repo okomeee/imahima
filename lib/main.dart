@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imahima/init.dart';
+
 import 'package:flutter/rendering.dart';
 
 void main() {
@@ -19,9 +20,8 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (_) => new InitScreen(),
-        //'/login':(_)=> new Login(),
       },
-      theme: new ThemeData.dark(),
+      // theme: new ThemeData.dark(),
     );
   }
 }
