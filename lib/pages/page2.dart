@@ -1,6 +1,7 @@
 // ymt117
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -8,40 +9,46 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
-  var _date = DateTime.now();
+  //DateTime _date = DateTime.now();
+  String formattedDate = DateFormat('kk:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 150.0),
         children: [
           Text(
-            ' ~ $_date まで',
+            ' ~ $formattedDate まで',
             textAlign: TextAlign.center,
             textScaleFactor: 2.5,
           ),
-          FlatButton(
-              onPressed: () {
-                DatePicker.showTimePicker(context, showTitleActions: true,
-                    onChanged: (date) {
-                  print('change $date in time zone ' +
-                      date.timeZoneOffset.inHours.toString());
-                }, onConfirm: (date) {
-                  setState(() {
-                    _date = date;
-                  });
-                  print('change $date');
-                }, currentTime: DateTime.now());
-              },
-              child: Text(
-                '時刻を設定する',
-                style: TextStyle(color: Colors.blue),
-              )),
+          timePicker(),
           textBox,
           buttonSection,
         ],
       ),
     );
+  }
+
+  Widget timePicker() {
+    return FlatButton(
+        onPressed: () {
+          DatePicker.showTimePicker(context, showTitleActions: true,
+              onChanged: (date) {
+            debugPrint('change $date in time zone ' +
+                date.timeZoneOffset.inHours.toString());
+          }, onConfirm: (date) {
+            setState(() {
+              formattedDate = DateFormat('kk:mm').format(date);
+            });
+            debugPrint('change $date');
+          }, currentTime: DateTime.now());
+        },
+        child: Text(
+          '時刻を設定する',
+          style: TextStyle(color: Colors.blue),
+        ));
   }
 
   Widget textBox = Container(
@@ -54,6 +61,7 @@ class _SecondScreenState extends State<SecondScreen> {
   );
 
   Widget buttonSection = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 50.0),
     child: RaisedButton(
       onPressed: () {
         // 入力した「いまヒマ」情報をアップロードする処理
