@@ -43,7 +43,7 @@ class _SecondScreenState extends State<SecondScreen> {
         child: Text(
           'show date time picker (English)',
           style: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 255),
+            color: Color.fromARGB(255, 50, 200, 255),
         ),
       )
     );
