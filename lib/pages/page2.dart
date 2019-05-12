@@ -8,13 +8,15 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
+  var _date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
           Text(
-            '15:00 ~ 18:00 まで',
+            ' ~ $_date まで',
             textAlign: TextAlign.center,
             textScaleFactor: 2.5,
           ),
@@ -25,6 +27,9 @@ class _SecondScreenState extends State<SecondScreen> {
                   print('change $date in time zone ' +
                       date.timeZoneOffset.inHours.toString());
                 }, onConfirm: (date) {
+                  setState(() {
+                    _date = date;
+                  });
                   print('change $date');
                 }, currentTime: DateTime.now());
               },
