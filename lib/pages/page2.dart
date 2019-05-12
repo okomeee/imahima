@@ -35,13 +35,13 @@ class _SecondScreenState extends State<SecondScreen> {
         onPressed: () {
           DatePicker.showTimePicker(context, showTitleActions: true,
               onChanged: (date) {
-            print('change $date in time zone ' +
+            debugPrint('change $date in time zone ' +
                 date.timeZoneOffset.inHours.toString());
           }, onConfirm: (date) {
             setState(() {
               formattedDate = DateFormat('kk:mm').format(date);
             });
-            print('change $date');
+            debugPrint('change $date');
           }, currentTime: DateTime.now());
         },
         child: Text(
