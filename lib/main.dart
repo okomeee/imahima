@@ -19,6 +19,7 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (_) => new InitScreen(),
+        //'/login':(_)=> new Login(),
       },
       theme: new ThemeData.dark(),
     );
