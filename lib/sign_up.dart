@@ -32,14 +32,17 @@ class Request {
 }
 
 class Response {
+  final String name;
   final String token;
 
   Response({
-    this.token,
+    this.name,
+    this.token
   });
 
   factory Response.fromJson(Map<String, dynamic> json) {
     return Response(
+      name: json['name'],
       token: json['token'],
     );
   }
@@ -109,8 +112,8 @@ class _SignUp extends State<SignUp> {
   void _submit() {
     Future<Response> res = _requestToAPI(nameController.text, passController.text);
     res.then((Response response){
-      if (response.token != null){
-        _setupToken(response.token);
+      if (response.name != null){
+        _setupToken(response.token + '/////' + response.name);
         debugPrint('SIGN UP');
         Navigator.pushAndRemoveUntil(
                         context,

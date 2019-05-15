@@ -66,9 +66,10 @@ class _Home extends State<Home> {
 
     _tokenStorage.readToken().then((String t) {
       setState(() {
-        if (t.length > 0) {
+        if (t.length > 5) {
+          List d = t.split('/////');
           // Tokenを取得
-          _token = t;
+          _token = d[0];
           debugPrint(_token);
           // APIサーバーからデータ取得 + 変数(_dataList)
           dataGet().then((List<DataList> onValue){
