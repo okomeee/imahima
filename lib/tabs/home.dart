@@ -55,7 +55,7 @@ class Home extends StatefulWidget{
 }
 
 class _Home extends State<Home> {
-  List<DataList> alldata;
+  List<DataList> alldata = new List<DataList>();
   DataList datalist;
   TokenStorage _tokenStorage = new TokenStorage();
   String _token = '';
@@ -97,8 +97,6 @@ class _Home extends State<Home> {
       for(int i = 0; i < datalist.length; i++){
         dt.add(DataList.fromJson(datalist[i]));
       }
-      //print(dt);
-      //await new Future.delayed(new Duration(seconds: 5));
       return dt;
     } else {
       throw Exception('Failed to load post');
@@ -107,17 +105,15 @@ class _Home extends State<Home> {
 
   List<Widget> wList() {
     List<Widget> _buffer = [];
-    if(alldata.length > 0) {
-      for(var i = 0; i < alldata.length; i++) {
-        _buffer.add(
-          ListTile(
-            leading: FlutterLogo(size: 72.0),
-            title: Text(alldata[i].user.name),
-            subtitle: Text(alldata[i].comment),
-            onTap: () { /* react to the tile being tapped */ },
-          )
-        );
-      }
+    for(var i = 0; i < alldata.length; i++) {
+      _buffer.add(
+        ListTile(
+          leading: FlutterLogo(size: 72.0),
+          title: Text(alldata[i].user.name),
+          subtitle: Text(alldata[i].comment),
+          onTap: () { /* react to the tile being tapped */ },
+        )
+      );
     }
     return _buffer;
   }
