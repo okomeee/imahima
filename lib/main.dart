@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:imahima/sign_in.dart';
 import 'package:imahima/sign_up.dart';
+import 'package:imahima/tabs/friend_form.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/': (_) => new SignIn(),
         '/singup': (_) => new SignUp(),
+        '/friend': (_) => new FriendForm(),
       },
       // theme: new ThemeData.dark(),
     );

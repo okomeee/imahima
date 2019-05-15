@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:imahima/storage/token_storage.dart';
+
 // class DataList{
 //   final user_id;
 //   final todo;
@@ -53,27 +55,44 @@ class Home extends StatefulWidget{
 }
 
 class _Home extends State<Home> {
-
-  Future<List<DataList>> alldata;
+  List<DataList> alldata;
   DataList datalist;
+  TokenStorage _tokenStorage = new TokenStorage();
+  String _token = '';
 
   @override
   void initState(){
-    dataGet().then((onValue){
-      setState(() {
-        alldata = dataGet();
-      });
-    });
-
     super.initState();
 
+    _tokenStorage.readToken().then((String t) {
+      setState(() {
+        if (t.length > 0) {
+          // Tokenを取得
+          _token = t;
+          debugPrint(_token);
+          // APIサーバーからデータ取得 + 変数(_dataList)
+          dataGet().then((List<DataList> onValue){
+            setState(() {
+              alldata = onValue;
+            });
+          });
+        }
+      });
+    });
   }
+
   Future<List<DataList>> dataGet() async {
     var dt = new List<DataList>();
-    final response = await http.get('https://imahima-api.k-appdev.com/v1/posts');
+    final response = await http.get(
+      'https://imahima-api.k-appdev.com/v1/posts',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "OKOMEKOME $_token"
+      }
+    );
     String responseBody = utf8.decode(response.bodyBytes);
     final jsondatalist = json.decode(responseBody);
-    final datalist = jsondatalist; 
+    final datalist = jsondatalist;
     if (response.statusCode == 200) {
       for(int i = 0; i < datalist.length; i++){
         dt.add(DataList.fromJson(datalist[i]));
@@ -85,43 +104,28 @@ class _Home extends State<Home> {
       throw Exception('Failed to load post');
     }
   }
-  
 
-  int x;
+  List<Widget> wList() {
+    List<Widget> _buffer = [];
+    if(alldata.length > 0) {
+      for(var i = 0; i < alldata.length; i++) {
+        _buffer.add(
+          ListTile(
+            leading: FlutterLogo(size: 72.0),
+            title: Text(alldata[i].user.name),
+            subtitle: Text(alldata[i].comment),
+            onTap: () { /* react to the tile being tapped */ },
+          )
+        );
+      }
+    }
+    return _buffer;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:FutureBuilder<List<DataList>>(
-        future: alldata,
-        builder: (context,snapshot){
-          if(snapshot.hasData){
-            return new Container(
-            child:ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (BuildContext context, int index) {
-                  return new Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: Colors.black38),
-                      ),
-                    ),
-                    child: ListTile(
-                      leading: FlutterLogo(size: 72.0),
-                      title: Text(snapshot.data[index].user.name),
-                      subtitle: Text(snapshot.data[index].comment),
-                      onTap: () { /* react to the tile being tapped */ },
-                  ));
-              },
-            )
-          );
-
-          }else if(snapshot.hasError){
-            print('error');
-          }
-          return CircularProgressIndicator();
-        }
-      )
-
+      body: alldata.length > 0 ? ListView( children: wList() ) : Center( child: const CircularProgressIndicator() )
     );
   }
 }

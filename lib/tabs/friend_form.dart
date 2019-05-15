@@ -47,6 +47,9 @@ class _FriendForm extends State<FriendForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("友達追加"),
+      ),
       body: Center(
         child: Form(
           key: this._formKey,

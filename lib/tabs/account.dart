@@ -62,7 +62,13 @@ class _AccountState extends State<Account> {
             ),
           ),
         ],
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, '/friend');
+        },
+      ),
     );
   }
 }
