@@ -27,14 +27,17 @@ class Request {
 }
 
 class Response {
+  final String name;
   final String token;
 
   Response({
+    this.name,
     this.token
   });
 
   factory Response.fromJson(Map<String, dynamic> json) {
     return Response(
+      name: json['name'],
       token: json['token'],
     );
   }
@@ -89,8 +92,8 @@ class _SignInState extends State<SignIn> {
       // TODO 送信処理
       Future<Response> r = _requestToAPI(nameController.text, passController.text);
       r.then((Response response){
-        if (response.token != null){
-          _setupToken(response.token);
+        if (response.name != null){
+          _setupToken(response.token + '/////' + response.name);
           debugPrint('SIGN IN');
           debugPrint(response.token);
           Route route = MaterialPageRoute(builder: (context) => TabMain() );
