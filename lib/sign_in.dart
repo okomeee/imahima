@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:imahima/pages/home.dart';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
-import '../dialog/dialog.dart';
-import '../storage/token_storage.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
-// ---------
-// ログイン画面
-// ---------
+import 'package:imahima/tab_main.dart';
+import 'package:imahima/dialog/dialog.dart';
+import 'package:imahima/storage/token_storage.dart';
 
 var _baseURL = "https://imahima-api.k-appdev.com";
 
@@ -43,12 +40,12 @@ class Response {
   }
 }
 
-class Login extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  _LoginState createState() => new _LoginState();
+  _SignInState createState() => new _SignInState();
 }
 
-class _LoginState extends State<Login> {
+class _SignInState extends State<SignIn> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final nameController = TextEditingController();
   final passController = TextEditingController();
@@ -96,7 +93,7 @@ class _LoginState extends State<Login> {
           _setupToken(response.token);
           debugPrint('SIGN IN');
           debugPrint(response.token);
-          Route route = MaterialPageRoute(builder: (context) => HomeScreen() );
+          Route route = MaterialPageRoute(builder: (context) => TabMain() );
           Navigator.pushReplacement(context, route);
         }
       });
@@ -191,7 +188,7 @@ class _LoginState extends State<Login> {
                     margin: new EdgeInsets.only(
                       top: 20.0
                     ),
-                  )
+                  ),
                 ],
               ),
             )

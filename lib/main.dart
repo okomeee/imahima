@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:imahima/init.dart';
-
 import 'package:flutter/rendering.dart';
+
+import 'package:imahima/sign_in.dart';
+import 'package:imahima/sign_up.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -19,7 +20,8 @@ class App extends StatelessWidget {
       title: 'Imahima',
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        '/': (_) => new InitScreen(),
+        '/': (_) => new SignIn(),
+        '/singup': (_) => new SignUp(),
       },
       // theme: new ThemeData.dark(),
     );

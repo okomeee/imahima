@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AccountScreen extends StatefulWidget{
+class Account extends StatefulWidget{
   @override
-  _AccountScreenState createState() => new _AccountScreenState();
+  _AccountState createState() => new _AccountState();
 }
 
-class _AccountScreenState extends State<AccountScreen> {
+class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
-class SecondScreen extends StatefulWidget {
+class HimaForm extends StatefulWidget {
   @override
-  _SecondScreenState createState() => new _SecondScreenState();
+  _HimaForm createState() => new _HimaForm();
 }
 
-class _SecondScreenState extends State<SecondScreen> {
+class _HimaForm extends State<HimaForm> {
   //DateTime _date = DateTime.now();
   String formattedDate = DateFormat('kk:mm').format(DateTime.now());
 

@@ -5,13 +5,12 @@ class _ProfileData {
   String description = '';
 }
 
-class ThirdScreen extends StatefulWidget{
+class FriendForm extends StatefulWidget{
   @override
-  _ThirdScreenState createState() => new _ThirdScreenState();
-  
+  _FriendForm createState() => new _FriendForm();
 }
 
-class _ThirdScreenState extends State<ThirdScreen> {
+class _FriendForm extends State<FriendForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   _ProfileData _data = _ProfileData();
 
