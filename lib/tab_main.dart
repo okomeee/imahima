@@ -42,7 +42,7 @@ class _TabMainState extends State<TabMain> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        fixedColor: Colors.blue,
+        selectedItemColor : Colors.teal,
         onTap:(int index) {
           setState(() {
             _currentIndex= index;
@@ -56,7 +56,10 @@ class _TabMainState extends State<TabMain> {
             title: new Text('ホーム'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.add),
+            icon: new Icon(
+              Icons.add_circle,
+              size: 40.0,
+            ),
             title: new Text('暇追加'),
           ),
           BottomNavigationBarItem(

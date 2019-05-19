@@ -73,9 +73,11 @@ class _HimaForm extends State<HimaForm> {
     // 認証用Tokenをデバイスから変数(_token)に保存
     _tokenStorage.readToken().then((String token) {
       setState(() {
-        //if (token.length > 0) {
-          _token = token;
-        //}
+        if (token.length > 5) {
+          List d = token.split('/////');
+          // Tokenを取得
+          _token = d[0];
+        }
       });
     });
   }
@@ -89,7 +91,7 @@ class _HimaForm extends State<HimaForm> {
                 date.timeZoneOffset.inHours.toString());
           }, onConfirm: (date) {
             setState(() {
-              formattedDate = DateFormat('y-M-d kk:mm').format(date);
+              formattedDate = DateFormat('y-MM-d kk:mm').format(date);
               print(formattedDate);
             });
             debugPrint('change $date');

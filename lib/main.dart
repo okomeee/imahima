@@ -25,7 +25,9 @@ class App extends StatelessWidget {
         '/singup': (_) => new SignUp(),
         '/friend': (_) => new FriendForm(),
       },
-      // theme: new ThemeData.dark(),
+      theme: new ThemeData(
+        primaryColor: Colors.teal
+      ),
     );
   }
 }
